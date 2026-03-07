@@ -17,6 +17,7 @@ list_of_files =[
     f"src/{project_name}/exceptions.py",
     f"src/{project_name}/loggers.py",
     f"src/{project_name}/utils.py",
+    "main.py",
     "app.py",
     "Dockerfile",
     "requirements.txt",
