@@ -5,16 +5,19 @@ import pymysql
 from dotenv import load_dotenv
 
 from mlproject.logger import logging
-from mlproject.exception import CustomException  # fixed import
+from mlproject.exception import CustomException
 
 load_dotenv()
 
-host="localhost"
-user="root"
-password="1234"
-db="college"
-if not db:
-    raise CustomException("Database not provided in .env", sys)
+host = "localhost"
+user = "root"
+password = "1234"
+db = "college"
+
+# database validation
+if db is None or db == "":
+    raise CustomException("Database not provided", sys)
+
 
 def read_sql_data():
     logging.info("Reading SQL database started")
@@ -24,10 +27,10 @@ def read_sql_data():
             host=host,
             user=user,
             password=password,
-            db=db
+            database=db   # better to use 'database'
         )
 
-        logging.info(f"Connection established: {mydb}")
+        logging.info("Connection established")
 
         df = pd.read_sql_query("SELECT * FROM students", mydb)
 
